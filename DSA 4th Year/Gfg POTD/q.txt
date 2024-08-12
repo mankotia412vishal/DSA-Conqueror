@@ -1,0 +1,72 @@
+Great Battle Conundrum
+Maximillian is the chief commander of the Great Greek Army and he is
+leading his forces into a crucial war with Spain.
+If all the enemy soldiers stand in a straight line incrementally marked
+starting from position 1, and a particular soldier at position i dies, the
+soldiers at position 2i and 2i+1 die as well. This happens in a
+cascading manner and so, a major part of troops can be filled by just
+killing one person.
+By retrospection, Maximillian realizes that this also means that if the
+soldier marked 1 (standing at the head of the troops) is killed and
+then the entire army is defeated. This however is not an easy task as
+the commander of the Spanish leads the Spanish troops and stands at
+the head of the troops. When one cascading set of deaths is
+completed, the remaining troops re-align; filling in the missing gaps
+and the death rule applies to the new positions.
+
+Let there be N soldiers in the enemy's camp marked as 1,2,3,..., N.
+Maximillian identifies a list of K individuals by their marked numbers,
+who will be executed in a sequential manner. Return the list of soldiers
+left in the enemy camp in increasing order of their marked values.
+Input Specification:
+input1: N, number of soldiers in the enemy camp
+input2: K, number of soldiers to be killed
+input3: An array of soldiers numbered between 1 to ff who will
+be killed sequentially in the mentioned order
+Output Specification:
+Return an array of numbers that belong to soldiers who are alive
+at the end (in increasing order). If all are dead, then return {0}.
+
+Example 1:
+input1: 7
+input2: 1
+input3: (1)
+Output: {0}
+
+When Soldier (1) is killed, then (2,3) die.
+When (2,3) die, (4,5,6,7) die.
+Example 2:
+inputt: 7
+input2:2
+input3: (2.7}
+Output: (1,3,6}
+
+
+Explanations:
+The soldiers can be represented in the following way:
+When Soldier - {2) is killed, then {4,5) die.
+They do not have any troops at 2i and 2i+1.
+# // The new representation becomes:
+# // -4:
+
+# // this is a graoh question
+def get_alive_soldiers(N, K, killed_soldiers):
+    soldiers = set(range(1, N+1))
+    for soldier in killed_soldiers:
+        if soldier in soldiers:
+            soldiers.remove(soldier)
+            i = soldier
+            while i <= N:
+                if i * 2 in soldiers:
+                    soldiers.remove(i * 2)
+                if i * 2 + 1 in soldiers:
+                    soldiers.remove(i * 2 + 1)
+                i *= 2
+    return sorted(list(soldiers))
+
+# Example usage:
+N = 7
+K = 1
+killed_soldiers = [1]
+result = get_alive_soldiers(N, K, killed_soldiers)
+print(result)  # Output: [0]
