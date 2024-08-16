@@ -10,4 +10,4 @@ while(i<=n):
         print("*",end="")
         j+=1
     print()
-    i+=1
+    i+=1    
