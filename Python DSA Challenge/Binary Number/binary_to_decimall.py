@@ -1,0 +1,10 @@
+n=101
+ans=0
+i=0
+while(n!=0):
+    ld=n%10
+    ans=ld*pow(2,i)+ans
+    print(ans)
+    n=n//10
+    i+=1
+print(ans)
